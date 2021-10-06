@@ -5,6 +5,8 @@ import debug from './utils/debug';
 import defaults from './defaults';
 import settings from './settings';
 
+import { isBrowser } from './utils/browser'
+
 class HelloSign extends Emitter {
 
   /**
@@ -434,6 +436,10 @@ class HelloSign extends Emitter {
    * @private
    */
   _renderMarkup() {
+    if (!isBrowser) {
+      return
+    }
+
     const elem = document.createElement('div');
 
     if (this._config.container) {
@@ -469,6 +475,10 @@ class HelloSign extends Emitter {
    * @private
    */
   _appendMarkup() {
+    if (!isBrowser) {
+      return
+    }
+
     this._baseEl = this._renderMarkup();
 
     // Listen for click events within the HelloSign
@@ -494,6 +504,9 @@ class HelloSign extends Emitter {
    * @private
    */
   _clearMarkup() {
+    if (!isBrowser) {
+      return
+    }
     this._baseEl.parentElement.removeChild(this._baseEl);
   }
 
@@ -657,6 +670,9 @@ class HelloSign extends Emitter {
    * @private
    */
   _appDidInitialize(payload) {
+    if (!isBrowser) {
+      return
+    }
     debug.info('app was initialized');
 
     this._isReady = true;
@@ -820,6 +836,9 @@ class HelloSign extends Emitter {
    * @private
    */
   _userDidSendRequest(payload) {
+    if (!isBrowser) {
+      return
+    }
     debug.info('user sent the signature request');
 
     this._isSentOrSigned = true;
@@ -843,6 +862,9 @@ class HelloSign extends Emitter {
    * @private
    */
   _userDidSignRequest(payload) {
+    if (!isBrowser) {
+      return
+    }
     debug.info('user signed the signature request');
 
     this._isSentOrSigned = true;
@@ -859,7 +881,11 @@ class HelloSign extends Emitter {
    * @param {Event} evt
    * @private
    */
+
   _onEmbeddedClick(evt) {
+    if (!isBrowser) {
+      return
+    }
     const elem = evt.target;
 
     // Check if the element that was clicked is the close
@@ -1023,6 +1049,9 @@ class HelloSign extends Emitter {
    * @public
    */
   open(url, opts = {}) {
+    if (!isBrowser) {
+      return
+    }
     debug.info('open()', url, opts);
 
     // Close if embedded is already open.
@@ -1067,6 +1096,9 @@ class HelloSign extends Emitter {
    * @public
    */
   close() {
+    if (!isBrowser) {
+      return
+    }
     debug.info('close()');
 
     // It's already closed!
