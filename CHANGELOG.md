@@ -2,6 +2,18 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+## [2.3.0-beta.0](https://github.com/mixedmedia/hellosign-embedded/compare/v2.9.0...v2.3.0-beta.0) (2021-10-06)
+
+
+### Features
+
+* Update node-sass and sass-loader ([0234daf](https://github.com/mixedmedia/hellosign-embedded/commit/0234daf5d9a8654df0313ae95b42eb56220cff23))
+
+
+### Bug Fixes
+
+* Do not use self-closing tags in HTML markup ([9520b39](https://github.com/mixedmedia/hellosign-embedded/commit/9520b39f19fbe86c74d94fa3c331cee5a9cf064c))
+
 ### [0.1.1](https://github.com/mixedmedia/hellosign-embedded/compare/v2.9.0...v0.1.1) (2021-10-06)
 
 
