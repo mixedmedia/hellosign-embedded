@@ -1,5 +1,5 @@
 {
-  "name": "hellosign-embedded",
+  "name": "@mixedmedia/hellosign-embedded-universal",
   "version": "2.10.0",
   "description": "Embed HelloSign signature requests and templates from within your web application.",
   "main": "index.js",
@@ -10,26 +10,29 @@
     "release:beta": "standard-version --prerelease beta",
     "test": "jest src"
   },
+  "publishConfig": {
+    "registry": "https://npm.pkg.github.com"
+  },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/hellosign/hellosign-embedded.git"
+    "url": "ssh://git@github.com/mixedmedia/hellosign-embedded.git",
   },
   "keywords": [
     "hellosign",
     "embedded",
     "esignature",
     "esign",
-    "sign"
+    "sign",
+    "universal"
   ],
   "author": {
-    "name": "HelloSign",
-    "email": "apisupport@hellosign.com",
-    "url": "https://hellosign.com"
+    "name": "Michael Frohberg",
+    "email": "michael.frohberg@mixedmedia.dev"
   },
   "bugs": {
-    "url": "https://github.com/hellosign/hellosign-embedded/issues"
+    "url": "https://github.com/mixedmedia/hellosign-embedded/issues"
   },
-  "homepage": "https://github.com/hellosign/hellosign-embedded",
+  "homepage": "https://github.com/mixedmedia/hellosign-embedded",
   "dependencies": {
     "common-tags": "^1.8.0",
     "debug": "^4.1.1",
