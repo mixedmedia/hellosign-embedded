@@ -5,8 +5,8 @@ const pkg = require('./package.json');
 
 const config = {
   entry: [
-    'url-polyfill',
-    'url-search-params-polyfill',
+    // 'url-polyfill',
+    // 'url-search-params-polyfill',
     './src/sass/embedded.scss',
     './src/embedded.js',
   ],
