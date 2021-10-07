@@ -437,10 +437,10 @@ class HelloSign extends Emitter {
    */
   _renderMarkup() {
     if (!isBrowser) {
-      return
+      return;
     }
 
-    const elem = document.createElement('div');
+    const elem = isBrowser && window?.document.createElement('div');
 
     if (this._config.container) {
       elem.innerHTML = safeHtml`
@@ -476,7 +476,7 @@ class HelloSign extends Emitter {
    */
   _appendMarkup() {
     if (!isBrowser) {
-      return
+      return;
     }
 
     this._baseEl = this._renderMarkup();
@@ -493,7 +493,8 @@ class HelloSign extends Emitter {
     if (this._config.container) {
       this._config.container.appendChild(this._baseEl);
     } else {
-      document.body.appendChild(this._baseEl);
+      // eslint-disable-next-line no-unused-expressions
+      isBrowser && window?.document?.body.appendChild(this._baseEl);
     }
   }
 
@@ -505,7 +506,7 @@ class HelloSign extends Emitter {
    */
   _clearMarkup() {
     if (!isBrowser) {
-      return
+      return;
     }
     this._baseEl.parentElement.removeChild(this._baseEl);
   }
@@ -671,7 +672,7 @@ class HelloSign extends Emitter {
    */
   _appDidInitialize(payload) {
     if (!isBrowser) {
-      return
+      return;
     }
     debug.info('app was initialized');
 
@@ -680,7 +681,8 @@ class HelloSign extends Emitter {
     this._sendConfigurationMessage();
     this._clearInitTimeout();
 
-    window.addEventListener('beforeunload', this._onBeforeUnload);
+    // eslint-disable-next-line no-unused-expressions
+    isBrowser && window.addEventListener('beforeunload', this._onBeforeUnload);
 
     this.emit(settings.events.READY, payload);
   }
@@ -837,13 +839,14 @@ class HelloSign extends Emitter {
    */
   _userDidSendRequest(payload) {
     if (!isBrowser) {
-      return
+      return;
     }
     debug.info('user sent the signature request');
 
     this._isSentOrSigned = true;
 
-    window.removeEventListener('beforeunload', this._onBeforeUnload);
+    // eslint-disable-next-line no-unused-expressions
+    isBrowser && window.removeEventListener('beforeunload', this._onBeforeUnload);
 
     this.emit(settings.events.SEND, payload);
   }
@@ -863,13 +866,14 @@ class HelloSign extends Emitter {
    */
   _userDidSignRequest(payload) {
     if (!isBrowser) {
-      return
+      return;
     }
     debug.info('user signed the signature request');
 
     this._isSentOrSigned = true;
 
-    window.removeEventListener('beforeunload', this._onBeforeUnload);
+    // eslint-disable-next-line no-unused-expressions
+    isBrowser && window.removeEventListener('beforeunload', this._onBeforeUnload);
 
     this.emit(settings.events.SIGN, payload);
   }
@@ -884,13 +888,13 @@ class HelloSign extends Emitter {
 
   _onEmbeddedClick(evt) {
     if (!isBrowser) {
-      return
+      return;
     }
-    const elem = evt.target;
+    const elem = evt?.target;
 
     // Check if the element that was clicked is the close
     // button.
-    if (elem.classList.contains(settings.classNames.MODAL_CLOSE_BTN)) {
+    if (elem?.classList.contains(settings.classNames.MODAL_CLOSE_BTN)) {
       evt.preventDefault();
 
       // If the app is ready but has not yet been sent or
@@ -1050,7 +1054,7 @@ class HelloSign extends Emitter {
    */
   open(url, opts = {}) {
     if (!isBrowser) {
-      return
+      return;
     }
     debug.info('open()', url, opts);
 
@@ -1078,7 +1082,8 @@ class HelloSign extends Emitter {
 
     this._isOpen = true;
 
-    window.addEventListener('message', this._onMessage);
+    // eslint-disable-next-line no-unused-expressions
+    isBrowser && window.addEventListener('message', this._onMessage);
 
     this.emit(settings.events.OPEN, {
       url: this._iFrameURL.href,
@@ -1097,7 +1102,7 @@ class HelloSign extends Emitter {
    */
   close() {
     if (!isBrowser) {
-      return
+      return;
     }
     debug.info('close()');
 
@@ -1119,8 +1124,10 @@ class HelloSign extends Emitter {
     this._isReady = false;
     this._isSentOrSigned = false;
 
-    window.removeEventListener('message', this._onMessage);
-    window.removeEventListener('beforeunload', this._onBeforeUnload);
+    // eslint-disable-next-line no-unused-expressions
+    isBrowser && window.removeEventListener('message', this._onMessage);
+    // eslint-disable-next-line no-unused-expressions
+    isBrowser && window.removeEventListener('beforeunload', this._onBeforeUnload);
 
     this.emit(settings.events.CLOSE);
   }
